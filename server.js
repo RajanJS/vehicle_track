@@ -19,13 +19,21 @@ var server = gps.server(options, function(device, connection) {
     });
 
 
-    //PING -> When the gps sends their position  
+    /******************************
+        PING - When the gps sends their position  
+        ******************************/
     device.on("ping", function(data) {
-
-        //After the ping is received, but before the data is saved
-        console.log(data);
+        //After the ping is received
+        //console.log(data);
+        // console.log("I'm here now: " + data.latitude + ", " + data.longitude);
         return data;
+    });
 
+    /******************************
+        ALARM - When the gps sends and alarm  
+        ******************************/
+    device.on("alarm", function(alarm_code, alarm_data, msg_data) {
+        console.log("Help! Something happend: " + alarm_code + " (" + alarm_data.msg + ")");
     });
 
 });
